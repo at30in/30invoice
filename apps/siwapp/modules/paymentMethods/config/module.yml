@@ -1,0 +1,4 @@
+all:
+  urls:
+    variables:
+      paymentMethods: paymentMethods/forFormSelect
