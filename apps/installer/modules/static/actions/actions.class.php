@@ -543,7 +543,8 @@ class staticActions extends sfActions
    **/
   private function writeConfig()
   {
-    return @file_put_contents($this->config_file, $this->generateConfig());
+    return @touch(sfConfig::get('sf_upload_dir').DIRECTORY_SEPARATOR.'installed');
+    //return @file_put_contents($this->config_file, $this->generateConfig());
   }
   
   /**
@@ -565,7 +566,8 @@ class staticActions extends sfActions
         $sf_root_dir :
         $options['sf_web_dir'].DIRECTORY_SEPARATOR.'..';
         
-        $cond1 = $sw_installed;
+        //$cond1 = $sw_installed;
+        $cond1 = file_exists(sfConfig::get('sf_upload_dir').DIRECTORY_SEPARATOR.'installed');
         $cond2 = realpath($root_dir_path) == $options['sf_root_dir'];
       }
       else {
