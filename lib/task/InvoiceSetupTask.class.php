@@ -29,6 +29,20 @@ class invoiceSetupTask extends sfBaseTask {
     chmod('log', 0777);
     chmod('web/uploads', 0777);
 
+    if(!file_exists('config/databases.yml'))
+    {
+      copy('config/databases.dist', 'config/databases.yml');
+    }
+
+    $response = $this->askConfirmation('Settings database?: (y/n)');
+    if($response)
+    {
+      $db       = $this->ask('Database name: ');
+      $user     = $this->ask('Username: ');
+      $password = $this->ask('Password: ');
+      $this->runTask('configure:database', array('mysql:host=localhost;dbname='.$db, $user, $password));
+    }
+
     $this->runTask('doctrine:build',array(),array('all' => true));
     $this->runTask('plugin:publish-assets',array(),array());
     return;
