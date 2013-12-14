@@ -1,7 +1,7 @@
-<form id="step4Form" class="installerForm" action="<?php echo url_for($thisPage) ?>" method="post">
+<form id="step5Form" class="installerForm" action="<?php echo url_for($thisPage) ?>" method="post">
   <?php echo $form['_csrf_token']; ?>
   <div id="header">
-    <h2><?php echo __('Database Configuration') ?></h2>
+    <h2><?php echo __('Main Configuration') ?></h2>
     <ul>
       <li class="buttons">
         <?php echo gButton_to(__("Back"), $prev, 'type=button id=back', 'button=true') ?>
@@ -13,51 +13,48 @@
   <?php include_partial('sidebar', array('step' => $step)) ?>
   
   <div id="content">
-    <h3><?php echo __('Connection Settings') ?></h3>
+    <h3><?php echo __('Administrator user details') ?></h3>
+    <p><?php echo __('Enter the following information for the super administrator user:')?></p>
 
-    <p>
-      <?php echo __('Enter your database connection details below.') ?>
-      <?php echo __("If you're not sure about these, contact your host.") ?>
-    </p>
-      
     <ul class="formField">
       <li>
-        <span class="label"><?php echo $form['database']->renderLabel() ?></span>
-        <span><?php echo $form['database']->render(
-            $form['database']->hasError()? array('class' => 'error') : array()
+        <span class="label"><?php echo $form['admin_email']->renderLabel() ?></span>
+        <span><?php echo $form['admin_email']->render(
+            $form['admin_email']->hasError()? array('class' => 'error') : array()
         ) ?></span>
-        <?php echo $form['database']->renderError() ?>
+        <?php echo $form['admin_email']->renderError() ?>
       </li>
       <li>
-        <span class="label"><?php echo $form['username']->renderLabel() ?></span>
-        <span><?php echo $form['username']->render(
-            $form['username']->hasError()? array('class' => 'error') : array()
+        <span class="label"><?php echo $form['admin_username']->renderLabel() ?></span>
+        <span><?php echo $form['admin_username']->render(
+            $form['admin_username']->hasError()? array('class' => 'error') : array()
         ) ?></span>
-        <?php echo $form['username']->renderError() ?>
+        <?php echo $form['admin_username']->renderError() ?>
       </li>
       <li>
-        <span class="label"><?php echo $form['password']->renderLabel() ?></span>
-        <span><?php echo $form['password']->render(
-            $form['password']->hasError()? array('class' => 'error') : array()
+        <span class="label"><?php echo $form['admin_password']->renderLabel() ?></span>
+        <span><?php echo $form['admin_password']->render(
+            $form['admin_password']->hasError()? array('class' => 'error') : array()
         ) ?></span>
-        <?php echo $form['password']->renderError() ?>
+        <?php echo $form['admin_password']->renderError() ?>
       </li>
       <li>
-        <span class="label"><?php echo $form['host']->renderLabel() ?></span>
-        <span><?php echo $form['host']->render(
-            $form['host']->hasError()? array('class' => 'error') : array()
+        <span class="label"><?php echo $form['admin_password_bis']->renderLabel() ?></span>
+        <span><?php echo $form['admin_password_bis']->render(
+            $form['admin_password_bis']->hasError()? array('class' => 'error') : array()
         ) ?></span>
-        <?php echo $form['host']->renderError() ?>
-      </li>
-      <li>
-        <span class="label"><?php echo $form['overwrite']->renderLabel() ?></span>
-        <span><?php echo $form['overwrite']->render(
-            $form['overwrite']->hasError()? array('class' => 'error') : array()
-        ) ?></span>
-        <?php echo $form['overwrite']->renderError() ?>
+        <?php echo $form['admin_password_bis']->renderError() ?>
       </li>
     </ul>
     
-    <span class="global-errors"><?php echo $form->renderGlobalErrors() ?></span>
+    <h3><?php echo __('Application initial data') ?></h3>
+    <p><?php echo __('If you want to preload the database with sample data, check the following checkbox.')?></p>
+    <ul class="formField">
+      <li>
+        <span class="label"><?php echo $form['preload']->renderLabel() ?></span>
+        <span><?php echo $form['preload']->render() ?></span>
+      </li>
+    </ul>
+    <?php echo $form->renderGlobalErrors() ?>
   </div>
 </form>
