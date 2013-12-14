@@ -1,0 +1,6 @@
+Series:
+  default_serie:
+    name: Default
+    value: ''
+    first_number: 1
+    enabled: 1

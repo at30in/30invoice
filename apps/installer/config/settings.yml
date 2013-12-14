@@ -38,7 +38,7 @@ all:
     
     standard_helpers:       [Partial, Cache, I18N, Number, GoogleButtons3, Global, Installer]
     
-    enabled_modules:        [default]
+    enabled_modules:        [default, sfGuardAuth, sfGuardGroup, sfGuardUser, sfGuardPermission]
     
     login_module:           sfGuardAuth   # To be called when a non-authenticated user
     login_action:           signin        # Tries to access a secure page

@@ -135,7 +135,7 @@ class staticActions extends sfActions
    *
    * @param $request
    */
-  public function executeStep4(sfWebRequest $request)
+  /*public function executeStep4(sfWebRequest $request)
   {
     $this->form = new DatabaseConfigurationForm();
     
@@ -155,13 +155,13 @@ class staticActions extends sfActions
         $this->redirect($this->next);
       }
     }
-  }
+  }*/
   
   /**
    * Step #5: Configuration
    * @param $request
    */
-  public function executeStep5(sfWebRequest $request)
+  public function executeStep4(sfWebRequest $request)
   {
     $u = $this->getUser();
     
@@ -181,7 +181,7 @@ class staticActions extends sfActions
         $u->setAttribute('admin_username', $params['admin_username']);
         $u->setAttribute('admin_password', $params['admin_password']);
         $u->setAttribute('preload', isset($params['preload']) ? true : false);
-        $u->setAttribute('step', 6);
+        $u->setAttribute('step', 5);
         
         $this->redirect($this->next);
       }
@@ -192,25 +192,48 @@ class staticActions extends sfActions
    * Step #6: Finish
    * @param $request
    */
-  public function executeStep6(sfWebRequest $request)
+  public function executeStep5(sfWebRequest $request)
   {
     $user = $this->getUser();
+
     $this->messages  = array(); // array to save error messages
     $this->downloads = array(); // array to save the downloads
     $this->warnings  = array(); // array to save the "remove permissions!" warnings
 
     if ($request->isMethod('post'))
     {
+
+      $guardUser = new sfGuardUser();
+      $guardUser->setUsername($user->getAttribute('admin_username'));
+      $guardUser->setPassword($user->getAttribute('admin_password'));
+      $guardUser->setIsActive(true);
+      $guardUser->save();
+
+      $profile = $guardUser->Profile;
+      
+      $profile->setEmail($user->getAttribute('admin_email'));
+      $profile->setLanguage($user->getAttribute('language'));
+      $profile->setCountry($user->getAttribute('country'));
+      $profile->setSeries(1);
+      $profile->save();
+
+      $templates = new Template();
+      Doctrine_Core::loadData(sfConfig::get('sf_data_dir').DIRECTORY_SEPARATOR.'fixtures'.DIRECTORY_SEPARATOR.'templates.yml');
+      Doctrine_Core::loadData(sfConfig::get('sf_data_dir').DIRECTORY_SEPARATOR.'fixtures'.DIRECTORY_SEPARATOR.'series.yml');
+
+      @touch(sfConfig::get('sf_upload_dir').DIRECTORY_SEPARATOR.'installed');
+
       $dbhost     = $user->getAttribute('host');
       $dbname     = $user->getAttribute('database');
       $dbusername = $user->getAttribute('username');
       $dbpassword = $user->getAttribute('password');
       
-      $this->redirectIf($this->checkConfigFiles(), 'http://'.$_SERVER['HTTP_HOST']
+      $this->redirectIf(true, 'http://'.$_SERVER['HTTP_HOST']
         .substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], 'installer')-1).'/index.php');
     }
     else
     {
+      return sfView::SUCCESS;
       /*
         1. write databases.yml     >> WARNING: download
         2. write config.php        >> WARNING: download
