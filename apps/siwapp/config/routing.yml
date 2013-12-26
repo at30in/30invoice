@@ -58,6 +58,18 @@ estimates_edit:
   url:   /estimates/edit/:id
   param:  { module: estimates, action: edit, tab: estimates, searchForm: false }
 
+customers_requisitions:
+  url:   /customers-requisitions
+  param:  { module: customersRequisitions, action: index, tab: customers_requisitions, searchForm: true, searchNamespace: customers_requisitions }
+
+customers_requisitions_new:
+  url:   /customers-requisitions/new
+  param:  { module: customersRequisitions, action: new, tab: customers_requisitions, searchForm: false }
+
+customers_requisitions_edit:
+  url:   /customers-requisitions/edit/:id
+  param:  { module: customersRequisitions, action: edit, tab: customers_requisitions, searchForm: false }
+
 customers:
   url:   /customers
   param:  { module: customers, action: index, tab: customers, searchForm: true, searchNamespace: customers }

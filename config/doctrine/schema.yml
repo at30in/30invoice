@@ -4,12 +4,40 @@ options:
 Customer:
   columns:
     name: string(100)
+    code: string(50)
     name_slug: string(100)
     identification: string(50)
     email: string(100)
     contact_person: string(100)
     invoicing_address: clob
     shipping_address: clob
+  indexes:
+    cstm:
+      fields: [name]
+      #type: unique
+    cstm_slug:
+      fields: [name_slug]
+      #type: unique
+    code:
+      fields: [code]
+      #type: unique
+
+CustomerRequisition:
+  columns:
+    name: string(100)
+    name_slug: string(100)
+    vat: string(30)
+    fiscal_code: string(50)
+    address: clob
+    phone: string(20)
+    mobile: string(20)
+    fax: string(20)
+    email: string(100)
+    privacy:  
+      type: boolean
+      default: false
+    website: string(255)
+    notes: text
   indexes:
     cstm:
       fields: [name]

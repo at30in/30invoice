@@ -249,7 +249,7 @@
       </trans-unit>
       <trans-unit>
         <source>Issue date</source>
-        <target>Data scadenza</target>
+        <target>Data emissione</target>
       </trans-unit>
       <trans-unit>
         <source>Due date</source>
@@ -1045,6 +1045,18 @@
       <trans-unit>
         <source>Vat</source>
         <target>P.Iva</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Customers requisitions</source>
+        <target>Clienti sequestri</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Customers requisitions Module</source>
+        <target>Modulo clienti sequestri</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Client Code</source>
+        <target>Codice Cliente</target>
       </trans-unit>
     </body>
   </file>

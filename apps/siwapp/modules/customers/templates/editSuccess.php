@@ -17,6 +17,9 @@ $customer = $customerForm->getObject();
   <h3><?php echo __('Client info') ?></h3>
   <ul>
     <li>
+      <span class="_25"><?php echo render_tag($customerForm['code'])?></span>
+    </li>
+    <li>
       <span class="_75">
         <?php echo render_tag($customerForm['name'])?>
         <?php echo $customerForm['name_slug']->renderError()?>
@@ -24,7 +27,7 @@ $customer = $customerForm->getObject();
       <span class="_25"><?php echo render_tag($customerForm['identification'])?></span>
     </li>
     <li>
-      <span class="_50"><?php echo render_tag($customerForm['contact_person'])?></span>
+      <!-- <span class="_50"><?php echo render_tag($customerForm['contact_person'])?></span> -->
       <span class="_50"><?php echo render_tag($customerForm['email'])?></span>
     </li>
     <li>

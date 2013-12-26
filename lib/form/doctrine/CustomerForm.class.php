@@ -19,40 +19,20 @@ class CustomerForm extends BaseCustomerForm
                              'name' => 'Client Name',
                              'identification'=>'Client Legal Id',
                              'contact_person'=> 'Contact Person',
+                             'code'=> 'Client Code',
                              'invoicing_address' => 'Invoicing Address',
                              'shipping_address'=> 'Shipping Address',
                              'email'=> 'Client Email Address'
                              );
 
-    $this->widgetSchema['name'] = new sfWidgetFormInputText(
-      array('label'       => ''), 
-      array('placeholder' => $i18n->__('Client Name'))
-      );
+    $this->widgetSchema['name']->setAttributes(array('placeholder' => $i18n->__('Client Name')));
+    $this->widgetSchema['identification']->setAttributes(array('placeholder' => $i18n->__('Client Legal Id')));
+    $this->widgetSchema['contact_person']->setAttributes(array('placeholder' => $i18n->__('Contact Person')));
+    $this->widgetSchema['code']->setAttributes(array('placeholder' => $i18n->__('Client Code')));
+    $this->widgetSchema['invoicing_address']->setAttributes(array('rows' => 5, 'placeholder' => $i18n->__('Invoicing Address')));
+    $this->widgetSchema['shipping_address']->setAttributes(array('rows' => 5, 'placeholder' => $i18n->__('Shipping Address')));
+    $this->widgetSchema['email']->setAttributes(array('placeholder' => $i18n->__('Client Email')));
 
-    $this->widgetSchema['identification'] = new sfWidgetFormInputText(
-      array('label'       => ''), 
-      array('placeholder' => $i18n->__('Client Legal Id'))
-      );
-
-    $this->widgetSchema['contact_person'] = new sfWidgetFormInputText(
-      array('label'       => ''), 
-      array('placeholder' => $i18n->__('Contact Person'))
-      );
-
-    $this->widgetSchema['invoicing_address'] = new sfWidgetFormTextarea(
-      array('label'       => ''), 
-      array('placeholder' => $i18n->__('Invoicing Address'))
-      );
-
-    $this->widgetSchema['shipping_address'] = new sfWidgetFormTextarea(
-      array('label'       => ''), 
-      array('placeholder' => $i18n->__('Shipping Address'))
-      );
-
-    $this->widgetSchema['email'] = new sfWidgetFormInputText(
-      array('label'       => ''), 
-      array('placeholder' => $i18n->__('Client Email'))
-      );
 
     $this->widgetSchema->setHelps($common_defaults);
 
@@ -72,7 +52,7 @@ class CustomerForm extends BaseCustomerForm
                               $this->validatorSchema['name_slug']->
                                 getMessages()
                               ));
-    foreach($this->validatorSchema->getPostValidator()->getValidators() as $val)
+    /*foreach($this->validatorSchema->getPostValidator()->getValidators() as $val)
     {
       if($val instanceOf sfValidatorDoctrineUnique and 
          $val->getOption('column')==array('name_slug') )
@@ -83,7 +63,7 @@ class CustomerForm extends BaseCustomerForm
                            );
         }
 
-    }
+    }*/
   }
 
   public function bind(array $taintedValues = null, array $taintedFiles = null)

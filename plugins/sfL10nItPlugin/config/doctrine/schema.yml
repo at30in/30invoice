@@ -1,0 +1,21 @@
+ZipCode:
+  tableName: zip_codes
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      notnull: true
+      autoincrement: true
+      unique: true
+    province: string(2)
+    municipality: string(255)
+    municipality_secondary: string(255)
+    hamlet: string(255)
+    hamlet_secondary: string(255)
+    topo: string(255)
+    topo_secondary: string(255)
+    dugt: string(255)
+    street_number: string(20)
+    zip_code: string(10)

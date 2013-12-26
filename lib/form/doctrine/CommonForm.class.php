@@ -16,6 +16,7 @@ class CommonForm extends BaseCommonForm
 
   public function configure()
   {
+    $i18n = sfContext::getInstance()->getI18N();
     $decorator = new myFormSchemaFormatter($this->getWidgetSchema());
     $this->widgetSchema->addFormFormatter('custom', $decorator);
     $this->widgetSchema->setFormFormatterName('custom');
@@ -36,6 +37,12 @@ class CommonForm extends BaseCommonForm
       'choices' => SeriesTable::getChoicesForSelect()));
     $this->widgetSchema['series_id']->setDefault(
       sfContext::getInstance()->getUser()->getProfile()->getSeries());
+
+    // Customer Code
+    $this->widgetSchema['customer_code'] = new sfWidgetFormInputText(
+      array('label'       => ''), 
+      array('placeholder' => $i18n->__('Client Code'))
+    );
 
     // Payment Method
     $this->widgetSchema['payment_method_id'] = new sfWidgetFormSelect(array(
@@ -60,6 +67,14 @@ class CommonForm extends BaseCommonForm
                              );
 
     $this->widgetSchema->setHelps(array_merge($this->widgetSchema->getHelps(),$common_defaults));
+
+    $this->widgetSchema['customer_name']->setAttributes(array('placeholder' => $i18n->__('Client Name')));
+    $this->widgetSchema['customer_identification']->setAttributes(array('placeholder' => $i18n->__('Client Legal Id')));
+    $this->widgetSchema['contact_person']->setAttributes(array('placeholder' => $i18n->__('Contact Person')));
+    $this->widgetSchema['contact_person']->setAttributes(array('placeholder' => $i18n->__('Contact Person')));
+    $this->widgetSchema['invoicing_address']->setAttributes(array('rows' => 5,'placeholder' => $i18n->__('Invoicing Address'))); 
+    $this->widgetSchema['shipping_address']->setAttributes(array('rows' => 5,'placeholder' => $i18n->__('Shipping Address'))); 
+    $this->widgetSchema['customer_email']->setAttributes(array('placeholder' => $i18n->__('Client Email Address'))); 
 
 
     $this->setDefault('tags', implode(',',$this->object->getTags()));

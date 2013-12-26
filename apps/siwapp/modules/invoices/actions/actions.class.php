@@ -60,15 +60,7 @@ class invoicesActions extends sfActions
     $i18n = $this->getContext()->getI18N();
     $invoice = new Invoice();
     
-    $invoice->fromArray(array(
-                          'customer_name'=>$i18n->__('Client Name'),
-                          'customer_identification'=>$i18n->__('Client Legal Id'),
-                          'contact_person'=> $i18n->__('Contact Person'),
-                          'invoicing_address'=> $i18n->__('Invoicing Address'),
-                          'shipping_address'=> $i18n->__('Shipping Address'),
-                          'customer_email'=> $i18n->__('Client Email Address'),
-                          'number'=> $invoice->getNextNumber()
-                          ));
+    $invoice->fromArray(array('number' => $invoice->getNextNumber()));
     $this->invoiceForm = new InvoiceForm($invoice, array('culture'=>$this->culture));
     $this->title       = $i18n->__('New Invoice');
     $this->action      = 'create';

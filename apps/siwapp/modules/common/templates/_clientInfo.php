@@ -2,11 +2,14 @@
   <h3><?php echo __('Client info') ?></h3>
   <ul>
     <li>
+      <span class="_25"><?php echo render_tag($invoiceForm['customer_code'])?></span>
+    </li>
+    <li>
       <span class="_75"><?php echo render_tag($invoiceForm['customer_name'])?></span>
       <span class="_25"><?php echo render_tag($invoiceForm['customer_identification'])?></span>
     </li>
     <li>
-      <span class="_50"><?php echo render_tag($invoiceForm['contact_person'])?></span>
+      <!-- <span class="_50"><?php echo render_tag($invoiceForm['contact_person'])?></span>  -->
       <span class="_50"><?php echo render_tag($invoiceForm['customer_email'])?></span>
     </li>
     <li>

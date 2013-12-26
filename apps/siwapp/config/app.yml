@@ -48,3 +48,7 @@ all:
         verbose_name: 'Products Module'
         tab_name: 'Products'
         new_button_name: 'New Product'
+      customers_requisitions:
+        verbose_name: 'Customers requisitions Module'
+        tab_name: 'Customers requisitions'
+        new_button_name: 'New Customer requisitions'

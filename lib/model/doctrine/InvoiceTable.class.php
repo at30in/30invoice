@@ -12,9 +12,12 @@ class InvoiceTable extends Doctrine_Table
    **/
   public function getNextNumber($series_id)
   {
+    $year = date('Y');
     $found = $this->createQuery()
       ->where('Draft = ?', 0)
       ->andWhere('series_id = ?', $series_id)
+      ->andWhere('issue_date >= ?', $year.'-01-01' )
+      ->andWhere('issue_date <= ?', $year.'-12-31' )
       ->execute()
       ->count();
     
@@ -24,6 +27,8 @@ class InvoiceTable extends Doctrine_Table
         ->select('MAX(number) AS max_number')
         ->where('Draft = ?', 0)
         ->andWhere('series_id = ?', $series_id)
+        ->andWhere('issue_date >= ?', $year.'-01-01' )
+        ->andWhere('issue_date <= ?', $year.'-12-31' )
         ->fetchOne();
       
       return intval($rs->getMaxNumber()) + 1;

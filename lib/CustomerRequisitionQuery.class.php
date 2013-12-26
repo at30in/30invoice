@@ -1,11 +1,11 @@
 <?php
 
-class CustomerQuery extends Doctrine_Query
+class CustomerRequisitionQuery extends Doctrine_Query
 {
   public static function create($conn = null, $class = null)
   {
     $q = new CustomerQuery($conn);
-    $q->from("Customer c, c.Commons i WITH i.type= 'Invoice'")
+    $q->from("CustomerRequisition c")
       ->orderBy('c.name asc')
       ->groupBy('id');
     
@@ -26,14 +26,14 @@ class CustomerQuery extends Doctrine_Query
       {
         $this->textSearch($search['query']);
       }
-      if(isset($search['from']))
+      /*if(isset($search['from']))
       {
         $this->fromDate($search['from']);
       }
       if(isset($search['to']))
       {
         $this->toDate($search['to']);
-      }
+      }*/
     }
     return $this;
   }
@@ -44,10 +44,7 @@ class CustomerQuery extends Doctrine_Query
     if($text)
     {
       $this
-        ->addWhere("(c.name LIKE '%$text%'".
-                   "OR c.identification LIKE '%$text%' ".
-                   "OR c.code LIKE '%$text%' ".
-                   "OR c.contact_person LIKE '%$text%')");
+        ->addWhere("(c.name LIKE '%$text%')");
 
     }
     return $this;
