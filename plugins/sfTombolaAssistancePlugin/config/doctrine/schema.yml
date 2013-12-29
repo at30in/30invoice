@@ -1,0 +1,36 @@
+ImportCustomer:
+  tableName: import_customers
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      notnull: true
+      autoincrement: false
+    imported_id: integer(4)
+
+ImportInvoice:
+  tableName: import_invoices
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      notnull: true
+      autoincrement: false
+    imported_id: integer(4)
+
+ImportItems:
+  tableName: import_items
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      notnull: true
+      autoincrement: false
+    imported_id: integer(4)
+    imported_row: integer(4)
