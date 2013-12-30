@@ -88,5 +88,14 @@ class Tools
     
     return $net_amount + $tax_amount ;
   }
+
+  public static function getNetAmount($unitary_cost, $quantity, $discount)
+  {
+    $base_amount = $unitary_cost * $quantity;
+    $discount_amount = $base_amount * $discount / 100;
+    $net_amount = $base_amount - $discount_amount;
+    
+    return $net_amount;
+  }
   
 }

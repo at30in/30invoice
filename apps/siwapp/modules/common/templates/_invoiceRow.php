@@ -87,7 +87,7 @@ $currency = $sf_user->getAttribute('currency');
     
   </td>
   <td class="right discount"><?php echo $invoiceItemForm['discount']->render(array(), ESC_RAW) ?> %</td>
-    <td class="right price"><?php echo format_currency(Tools::getGrossAmount($invoiceItemForm['unitary_cost']->getValue(),$invoiceItemForm['quantity']->getValue(),$invoiceItemForm['discount']->getValue(),$totalTaxesValue), $currency) ?> </td>
+    <td class="right price"><?php echo format_currency(Tools::getNetAmount($invoiceItemForm['unitary_cost']->getValue(),$invoiceItemForm['quantity']->getValue(),$invoiceItemForm['discount']->getValue()), $currency) ?> </td>
 </tr>
 <?php
 $urlAjax = url_for('common/ajaxInvoiceItemsAutocomplete');

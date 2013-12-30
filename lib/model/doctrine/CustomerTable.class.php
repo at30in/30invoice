@@ -81,12 +81,22 @@ class CustomerTable extends Doctrine_Table
    * @return array
    * @author Enrique Martinez
    **/
-  public function retrieveForSelect($q, $limit)
+  public function retrieveForSelect($q, $limit, $isCode)
   {
-    $items = $this->createQuery()
-      ->where('name_slug LIKE ?', '%'.CustomerTable::slugify($q).'%')
-      ->limit($limit)
-      ->execute();
+    if($isCode)
+    {
+      $items = $this->createQuery()
+        ->where('code LIKE ?', $q.'%')
+        ->limit($limit)
+        ->execute();
+    }
+    else
+    {
+      $items = $this->createQuery()
+        ->where('name_slug LIKE ?', '%'.CustomerTable::slugify($q).'%')
+        ->limit($limit)
+        ->execute();
+    }
     
     $res = array();
     $i = 0;
@@ -99,6 +109,7 @@ class CustomerTable extends Doctrine_Table
       $res[$i]['contact_person'] = $item->getContactPerson();
       $res[$i]['invoicing_address'] = $item->getInvoicingAddress();
       $res[$i]['shipping_address'] = $item->getShippingAddress();
+      $res[$i]['code'] = $item->getCode();
       $i++;
     }
     

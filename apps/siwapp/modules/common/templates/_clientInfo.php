@@ -21,7 +21,8 @@
 <?php
 use_helper('JavascriptBase');
 
-$urlAjax = url_for('common/ajaxCustomerAutocomplete');
+$urlAjax      = url_for('common/ajaxCustomerAutocomplete');
+$urlAjaxCode  = url_for('common/ajaxCustomerAutocomplete?code=1');
 echo javascript_tag("
   $('#".$invoiceForm['customer_name']->renderId()."')
     .autocomplete('".$urlAjax."', jQuery.extend({}, {
@@ -34,7 +35,8 @@ echo javascript_tag("
             data[key].contact_person,
             data[key].customer_email,
             data[key].invoicing_address,
-            data[key].shipping_address
+            data[key].shipping_address,
+            data[key].code
           ], value: data[key].customer, result: data[key].customer };
         }
         return parsed;
@@ -48,6 +50,38 @@ echo javascript_tag("
       $('#".$invoiceForm['customer_email']->renderId()."').val(item[3]);
       $('#".$invoiceForm['invoicing_address']->renderId()."').val(item[4]);
       $('#".$invoiceForm['shipping_address']->renderId()."').val(item[5]);
+      $('#".$invoiceForm['customer_code']->renderId()."').val(item[6]);
+    });
+
+
+  $('#".$invoiceForm['customer_code']->renderId()."')
+    .autocomplete('".$urlAjaxCode."', jQuery.extend({}, {
+      dataType: 'json',
+      parse:    function(data) {
+        var parsed = [];
+        for (key in data) {
+          parsed[parsed.length] = { data: [ 
+            data[key].code,
+            data[key].customer, 
+            data[key].customer_identification,
+            data[key].contact_person,
+            data[key].customer_email,
+            data[key].invoicing_address,
+            data[key].shipping_address
+          ], value: data[key].code, result: data[key].code };
+        }
+        return parsed;
+      },
+      minChars: 2,
+      matchContains: true
+    }))
+    .result(function(event, item) {
+      $('#".$invoiceForm['customer_name']->renderId()."').val(item[1]);
+      $('#".$invoiceForm['customer_identification']->renderId()."').val(item[2]);
+      $('#".$invoiceForm['contact_person']->renderId()."').val(item[3]);
+      $('#".$invoiceForm['customer_email']->renderId()."').val(item[4]);
+      $('#".$invoiceForm['invoicing_address']->renderId()."').val(item[5]);
+      $('#".$invoiceForm['shipping_address']->renderId()."').val(item[6]);
     });
 ");
 

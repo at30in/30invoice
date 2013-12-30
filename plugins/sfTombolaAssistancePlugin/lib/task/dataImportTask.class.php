@@ -16,8 +16,8 @@ class dataImportTask extends sfBaseTask
     //$this->configurePaymentMethods();
 
     //$this->customers();
-    //$this->invoices();
-    $this->items();
+    $this->invoices();
+    //$this->items();
   }
 
   private function configurePaymentMethods()
@@ -222,6 +222,7 @@ class dataImportTask extends sfBaseTask
       {
         $invoice->trySave();
         $invoice->refresh();
+        $invoice->trySave();  // Trick 
 
         $importInvoice = Doctrine::getTable('ImportInvoice')->find($invoice->getId());
         if(!$importInvoice)

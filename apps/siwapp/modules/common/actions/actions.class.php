@@ -49,7 +49,7 @@ class commonActions extends sfActions
           $item->Taxes = $taxes;
         }
         
-        $items[$itemId] = $format->format($item->getGrossAmount(), 'c', $currency);
+        $items[$itemId] = $format->format($item->getNetAmount(), 'c', $currency);
 
         $invoice->Items[] = $item;
       }
@@ -135,9 +135,10 @@ class commonActions extends sfActions
   public function executeAjaxCustomerAutocomplete(sfWebRequest $request)
   {
     $this->getResponse()->setContentType('application/json');
+    
     $q = $request->getParameter('q');
     $items = Doctrine::getTable('Customer')
-      ->retrieveForSelect($request->getParameter('q'), $request->getParameter('limit'));
+      ->retrieveForSelect($request->getParameter('q'), $request->getParameter('limit'), $request->getParameter('code',0));
 
     return $this->renderText(json_encode($items));
   }
