@@ -18,6 +18,6 @@
     <?php echo ($item->getDiscount() > 0) ? $item->getDiscount()."%" : null; ?>
   </td>
   <td class="right price">
-    <?php echo format_currency($item->getGrossAmount(), $currency) ?>
+    <?php echo format_currency($item->getNetAmount(), $currency) ?>
   </td>
 </tr>

@@ -31,7 +31,8 @@ class dashboardActions extends sfActions
 
     // for the overdue unset the date filters, to show all the overdue
     unset($search['from'], $search['to']);
-    $overdueQuery = InvoiceQuery::create()->search($search)->status(Invoice::OVERDUE);
+    $this->maxResultsOverdue = sfConfig::get('app_dashboard_max_results_overdue');
+    $overdueQuery = InvoiceQuery::create()->search($search)->status(Invoice::OVERDUE)->limit($this->maxResultsOverdue);
 
     // totals
     $this->gross  = $q->total('gross_amount');

@@ -16,6 +16,7 @@ class dataImportTask extends sfBaseTask
     //$this->configurePaymentMethods();
 
     //$this->customers();
+    //$this->customersForeigners();
     $this->invoices();
     //$this->items();
   }
@@ -75,6 +76,63 @@ class dataImportTask extends sfBaseTask
     }
     unset($taxes);
     unset($manager);
+  }
+
+  private function customersForeigners()
+  {
+    $manager  = Doctrine_Manager::getInstance();
+    $manager->setCurrentConnection('connect1');
+    $conn1    = $manager->getCurrentConnection();
+    $result = $conn1->execute("
+      SELECT 
+      cli.id_cliente AS id,
+      cli.cliente_codice AS code, 
+      cli.cliente_denominazione AS name, 
+      cli.cliente_piva_cf AS identification, 
+      cli.cliente_estero AS address
+      FROM gest_clienti AS cli 
+      WHERE cli.cliente_stato = 2 AND cli.cliente_cancellato = 'no'
+    ");
+    $rows   = $result->fetchAll();
+
+    $manager->setCurrentConnection('connect');
+    
+    foreach ($rows as $row)
+    {
+      $import = Doctrine::getTable('ImportCustomer')->findOneByImportedId($row['id']);  
+      if($import)
+      {
+        $customer = Doctrine::getTable('Customer')->find($import->id);
+      }
+      else
+      {
+        $customer                       = new Customer();  
+      }
+      $customer->name                 = $row['name'];
+      $customer->code                 = $row['code'];
+      $customer->identification       = $row['identification'];
+      $customer->invoicing_address    = preg_replace('#<br\s*?/?>#i', "\n", $row['address']);
+      try
+      {
+
+        $customer->trySave();
+        $customer->refresh();
+
+        $importCustomer               = new ImportCustomer();
+        $importCustomer->id           = $customer->getId();
+        $importCustomer->imported_id  = $row['id'];
+        $importCustomer->trySave();
+
+        //$this->invoices();
+
+      }
+      catch(Exception $e){}
+      $this->logSection('customer saved', sprintf('%s', $row['code']));
+
+      unset($customer);
+      unset($row);
+    }
+
   }
 
   private function customers()

@@ -140,6 +140,17 @@
         </tr>
       <?php endforeach; ?>
     </tbody>
+    <?php if ($overdueCounter > $maxResultsOverdue): ?>
+    <tfoot>
+      <tr>
+        <td colspan="9">
+          <small>
+            <?php echo link_to(__('view all  ([1] invoices)', array('[1]' => $overdueCounter)), '@invoices') ?>
+          </small>
+        </td>
+      </tr>
+    </tfoot>
+    <?php endif; ?>
   </table>
   
 </div>

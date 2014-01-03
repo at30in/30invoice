@@ -6,6 +6,15 @@
 
   <div class="invoice show">
 
+    <div id="invoice-data" class="global-data block">
+      <h3><?php echo __('Invoice Number') ?></h3>
+      <ul>
+        <li>
+          <span class="_25"><?php echo $invoice->getNumber() ?></span>
+        </li>
+      </ul>
+    </div>
+
     <div id="customer-data" class="global-data block">
       <h3><?php echo __('Client info') ?></h3>
       <ul>
@@ -25,8 +34,8 @@
         <li>
           <span>
             <span class="_50">
-              <label><?php echo __('Contact person') ?>:</label>
-              <?php echo $invoice->getContactPerson() ?>
+              <!-- <label><?php echo __('Contact person') ?>:</label>
+              <?php echo $invoice->getContactPerson() ?> -->
             </span>
             <span class="_50 _last">
               <label><?php echo __('Email') ?>:</label>
@@ -49,6 +58,13 @@
         </li>
       </ul>
     </div><!-- div#customer-data -->
+
+    <div id="description-data" class="block">
+      <h3><?php echo __('Description') ?></h3>
+      <div class="textarea">
+        <?php echo $invoice->getDescription() ?>
+      </div>
+    </div>
 
     <div id="payment-data" class="block">
       <h3><?php echo __('Payment details') ?></h3>

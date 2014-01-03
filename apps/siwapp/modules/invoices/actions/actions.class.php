@@ -52,7 +52,7 @@ class invoicesActions extends sfActions
   
   public function executeShow(sfWebRequest $request)
   {
-    $this->invoice = $this->getInvoice($request);
+    $this->invoice      = $this->getInvoice($request);
   }
 
   public function executeNew(sfWebRequest $request)
@@ -93,7 +93,8 @@ class invoicesActions extends sfActions
     // set draft=0 by default always
     $invoice->setDraft(false);
     $this->invoiceForm = new InvoiceForm($invoice, array('culture'=>$this->culture));
-    
+    $this->invoiceForm->setDefault('customer_code', $invoice->Customer->code);
+
     $i18n = $this->getContext()->getI18N();
     $this->title = $i18n->__('Edit Invoice').' '.$invoice;
     $this->action = 'update';
