@@ -23,7 +23,7 @@ class CommonInvoiceQuery extends Doctrine_Query
     {
       if(isset($search['query']))       $this->textSearch($search['query']);
       if(isset($search['series_id']))   $this->series($search['series_id']);
-      if(isset($search['number']))      $this->series_text($search['number']);   // Da cambiare
+      if(isset($search['number']))      $this->number($search['number']);   
       if(isset($search['customer_id'])) $this->customer($search['customer_id']);
       if(isset($search['tags']))        $this->withTags($search['tags']);
       if(isset($search['status']))      $this->status($search['status']);
@@ -65,6 +65,16 @@ class CommonInvoiceQuery extends Doctrine_Query
           .$itemsOr
           .")"
           );
+    }
+    
+    return $this;
+  }
+
+  public function number($number = null)
+  {
+    if($number)
+    {
+      $this->andWhere("i.number = ?", $number);
     }
     
     return $this;
