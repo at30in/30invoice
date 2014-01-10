@@ -39,7 +39,7 @@ class commonActions extends sfActions
           continue;
         }
         $item = new Item();
-        $item->setUnitaryCost($itemData['unitary_cost']);
+        $item->setUnitaryCost(floatval(str_replace(',','.',$itemData['unitary_cost'])));
         $item->setQuantity($itemData['quantity']);
         $item->setDiscount($itemData['discount']);
         

@@ -1,6 +1,7 @@
 all:
   urls:
     variables:
+      fullPayment:     payments/full
       addPayment:      payments/add
       paymentsForm:    payments/form
       refreshPayments: payments/refresh

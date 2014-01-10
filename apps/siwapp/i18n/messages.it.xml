@@ -1058,6 +1058,10 @@
         <source>Client Code</source>
         <target>Codice Cliente</target>
       </trans-unit>
+      <trans-unit>
+        <source>Full payment</source>
+        <target>Saldo</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

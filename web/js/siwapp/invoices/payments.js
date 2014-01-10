@@ -55,6 +55,24 @@ jQuery(function($){
       $(this).closest('tr.payments-row').remove();
     });
 
+    /* "Full payment" button */
+    $('.payments-row [rel=payments:full]').live('click', function(e) {
+      e.preventDefault();
+        
+        // find the layer with payments
+        var tr         = $(this).closest('.payments-row');
+        var container  = $(this).closest('.payments-row').find('.payments');
+        var invoice_id = tr.find('input.invoice_id').val();
+
+        $.post(window.siwapp_urls.fullPayment, { index: window.Payments.nextIndex, invoice_id: invoice_id },
+          function (data, status) {
+            container.append(data);
+            window.Payments.nextIndex++;
+          }
+        );
+      //$(this).closest('tr.payments-row').remove();
+    });
+
     /* Remove payment link*/
     $('.payments-row a.xit').live('click', function(e) {
       e.preventDefault();

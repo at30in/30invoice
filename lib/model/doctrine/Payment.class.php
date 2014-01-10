@@ -11,6 +11,21 @@ class Payment extends BasePayment
 
     return $this->_set('amount', $v);
   }
+
+  public function fullpayment()
+  {
+    if($this->_get('invoice_id'))
+    {
+      $invoice = Doctrine::getTable('Invoice')->find($this->_get('invoice_id'));
+      if($invoice->gross_amount - $invoice->paid_amount <= 0)
+      {
+        return false;
+      }
+      $this->setAmount($invoice->gross_amount - $invoice->paid_amount);
+      return true;
+    }
+    return false;
+  }
   
   public function postSave($event)
   {

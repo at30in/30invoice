@@ -68,5 +68,23 @@ class paymentsActions extends sfActions
     
     return $this->renderText('<li><ul><a href="#" class="xit"/>'.$form.'</ul></li>');
   }
+
+  public function executeFull(sfWebRequest $request)
+  {
+    $this->forward404Unless($index = $request->getParameter('index'));
+    $payment = new Payment();
+    $payment->setInvoiceId($request->getParameter('invoice_id'));
+    if(!$payment->fullpayment())
+    {
+      $this->renderText('');
+    }
+    
+    // insert a PaymentForm with csrf protection disabled 
+    $form = new PaymentForm($payment, array('culture'=>$this->getUser()->getCulture()), false);
+    $form->getWidgetSchema()->setNameFormat('payments[new_'.$index.'][%s]');
+    
+    return $this->renderText('<li><ul><a href="#" class="xit"/>'.$form.'</ul></li>');
+
+  }
   
 }

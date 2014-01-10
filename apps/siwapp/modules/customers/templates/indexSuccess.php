@@ -20,6 +20,7 @@ $csrf     = new sfForm();
             <td colspan="2">
               <?php echo gButton_to_function(__("Delete"), "do_batch('delete')", array('class'=>'batch delete action-clear', 'confirm'=>__('Are you sure?'))) ?>
             </td>
+            <td> &nbsp; </td>
             <td class="strong noborder"><?php echo __('Total')?></td>
             <td class="totalDue strong noborder right"><?php echo format_currency($due,$currency)?></td>
             <td class="strong noborder right"><?php echo format_currency($gross,$currency)?></td>
