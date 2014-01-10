@@ -3,10 +3,10 @@ default:
     content-type: text/html
 
   metas:
-    title:        siwapp
+    title:        30invoice
     #description:  symfony project
     #keywords:     symfony, project
-    language:     en
+    language:     it
     #robots:       index, follow
   
   stylesheets:

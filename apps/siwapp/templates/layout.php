@@ -16,7 +16,7 @@
 <div id="hd">
   <div id="hd-top">
     <a id="hd-top-logo" href="<?php echo url_for('@homepage') ?>">
-      <?php echo image_tag('logo.gif', 'alt=siwapp width=210 height=100 border=0') ?>
+      <?php echo image_tag('logo.png', 'alt=30invoice width=210 height=100 border=0') ?>
       <span class="version">
         <?php echo 'v. '.sfConfig::get('app_version');?>
       </span>

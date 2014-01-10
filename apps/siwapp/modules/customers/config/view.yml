@@ -1,6 +1,6 @@
 all:
   metas:
-    title:     siwapp - Customers
+    title:     30invoice - Clienti
   components:
     searchForm: [search, customerForm]
     

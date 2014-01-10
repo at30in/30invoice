@@ -68,5 +68,5 @@
     </div>
     
   </form>
-  <a id="siwapp_site_link" href="http://www.siwapp.org" target="_new">Siwapp Invoice System</a>
+  <a id="siwapp_site_link" href="http://www.studio30in.com" target="_new">by Studio30in.com</a>
 </div>
