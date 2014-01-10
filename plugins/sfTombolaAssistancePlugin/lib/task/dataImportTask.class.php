@@ -293,7 +293,11 @@ class dataImportTask extends sfBaseTask
 
         if($row['pagato'] == 'si')
         {
-          $payment                = new Payment();
+          $payment = Doctrine::getTable('Payment')->findOneByInvoiceId($invoice->getId());
+          if(!$payment)
+          {
+            $payment                = new Payment();
+          }
           $payment->invoice_id    = $invoice->id;
           $payment->date          = $invoice->issue_date;
           $payment->amount        = $invoice->gross_amount;
