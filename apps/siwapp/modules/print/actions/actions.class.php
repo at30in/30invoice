@@ -72,14 +72,19 @@ class printActions extends sfActions
    */
   public function executePdf(sfWebRequest $request)
   {
+    $i18n = $this->getContext()->getI18N();
     $model = $request->getParameter('model');
+
     switch($n = count($ids = (array) $this->getRequestParameter('ids', array())))
     {
       case 0:
         $this->forward404();
         break;
       case 1:
-        $name = $model."-{$ids[0]}";
+        $invoice  = Doctrine::getTable('Common')->find($ids[0]);
+        $t_model  = $i18n->__($model);
+        $date     = date('d/m/Y h:i:s', time());
+        $name     = $t_model."_{$invoice->getNumber()}_{$date}";//"-{$ids[0]}";
         break;
       default:
         $name = "$n-".$model."s";
