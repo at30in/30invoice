@@ -17,8 +17,9 @@ class dataImportTask extends sfBaseTask
 
     //$this->customers();
     //$this->customersForeigners();
-    $this->invoices();
-    //$this->items();
+    //$this->invoices();
+
+    $this->items();
   }
 
   private function configurePaymentMethods()
@@ -91,7 +92,14 @@ class dataImportTask extends sfBaseTask
       cli.cliente_piva_cf AS identification, 
       cli.cliente_estero AS address
       FROM gest_clienti AS cli 
-      WHERE cli.cliente_stato = 2 AND cli.cliente_cancellato = 'no'
+      WHERE (cli.cliente_stato = 2 AND cli.cliente_cancellato = 'no')
+      OR cli.id_cliente IN (
+        SELECT c.id_cliente
+        FROM gest_fatture fat
+        LEFT JOIN gest_clienti AS c ON c.id_cliente = fat.id_cliente 
+        WHERE c.cliente_cancellato = 'si' AND c.cliente_stato = 2
+        GROUP BY c.id_cliente
+      )
     ");
     $rows   = $result->fetchAll();
 
@@ -135,6 +143,11 @@ class dataImportTask extends sfBaseTask
 
   }
 
+  private function customersRemoved()
+  {
+
+  }
+
   private function customers()
   {
     $manager  = Doctrine_Manager::getInstance();
@@ -156,7 +169,14 @@ class dataImportTask extends sfBaseTask
       (SELECT c.*, p.provincia_nome, p.provincia_sigla FROM gest_comuni AS c 
       LEFT JOIN gest_province AS p ON p.id_provincia = c.id_provincia) AS T1 
       ON T1.id_comune = cli.id_comune 
-      WHERE cli.cliente_stato = 1 AND cli.cliente_cancellato = 'no'
+      WHERE (cli.cliente_stato = 1 AND cli.cliente_cancellato = 'no')
+      OR cli.id_cliente IN (
+        SELECT c.id_cliente
+        FROM gest_fatture fat
+        LEFT JOIN gest_clienti AS c ON c.id_cliente = fat.id_cliente 
+        WHERE c.cliente_cancellato = 'si' AND c.cliente_stato = 1
+        GROUP BY c.id_cliente
+      )
     ");
     $rows   = $result->fetchAll();
 
