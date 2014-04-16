@@ -1062,6 +1062,10 @@
         <source>Full payment</source>
         <target>Saldo</target>
       </trans-unit>
+      <trans-unit>
+        <source>show all results</source>
+        <target>Vedi tutti i risultati</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

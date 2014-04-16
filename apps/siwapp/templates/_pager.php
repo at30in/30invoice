@@ -20,6 +20,8 @@
 <?php endif; ?>
 
   <div class="small">
+    <?php $url = url_for($route) . '?showAllResults=true'; ?>
+    <?php echo link_to(__('show all results'), $url) ?>
     <?php echo __('Showing [1]-[2] of [3] results', array(
       '[1]' => $pager->getFirstIndice(), 
       '[2]' => $pager->getLastIndice(), 

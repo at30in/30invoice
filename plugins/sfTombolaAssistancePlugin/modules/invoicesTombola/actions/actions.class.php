@@ -8,9 +8,18 @@
  * @author     Siwapp Team
  * @version    SVN: $Id: actions.class.php 12474 2008-10-31 10:41:27Z fabien $
  */
-class invoicesActions extends sfActions
+
+require_once(sfConfig::get('sf_app_module_dir').'/invoices/actions/actions.class.php');
+class invoicesTombolaActions extends invoicesActions
 {
-  public function preExecute()
+
+  public function executeNew(sfWebRequest $request)
+  {
+    $this->getResponse()->addJavascript('../sfTombolaAssistancePlugin/js/tombola.js');
+    $request->setParameter('module', 'invoices');
+    parent::executeNew($request);
+  }
+  /*public function preExecute()
   {
     $this->currency = $this->getUser()->getAttribute('currency');
     $this->culture  = $this->getUser()->getCulture();
@@ -32,10 +41,6 @@ class invoicesActions extends sfActions
     $sort       = $this->getUser()->getAttribute('sort', array('issue_date', 'desc'), $namespace);
     $page       = $this->getUser()->getAttribute('page', 1, $namespace);
     $maxResults = $this->getUser()->getPaginationMaxResults();
-    if($request->getParameter('showAllResults', false))
-    {
-      $maxResults = 500;
-    }
     
     $q = InvoiceQuery::create()->search($search)->orderBy("$sort[0] $sort[1], number $sort[1]");
     // totals
@@ -203,14 +208,14 @@ class invoicesActions extends sfActions
       }
       $this->getUser()->error($i18n->__('The invoice has not been saved due to some errors.'));
     }
-  }
+  }*/
   
   /**
    * batch actions
    *
    * @return void
    **/
-  public function executeBatch(sfWebRequest $request)
+  /*public function executeBatch(sfWebRequest $request)
   {
     $i18n = $this->getContext()->getI18N();
     $form = new sfForm();
@@ -246,6 +251,6 @@ class invoicesActions extends sfActions
     }
 
     $this->redirect('@invoices');
-  }
+  }*/
   
 }

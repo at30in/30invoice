@@ -35,6 +35,7 @@ $csrf     = new sfForm();
               renderHeaders(array(
                 'number'        => array('Number', 'desc'),
                 'customer_name' => array('Customer Name', 'asc'),
+                'description'   => array('Description', 'asc'),
                 'issue_date'    => array('Date', 'desc'),
                 'due_date'      => array('Due Date', 'asc'),
                 'status'        => array('Status', 'asc'),
@@ -57,6 +58,7 @@ $csrf     = new sfForm();
               <td class="check"><input rel="item" type="checkbox" value="<?php echo $id ?>" name="ids[]"></td>
               <td><?php echo $invoice ?></td>
               <td class="<?php echo $invoice->getSentByEmail() ? 'sent' : null ?>"><?php echo $invoice->getCustomerName() ?></td>
+              <td><?php echo $invoice->getDescription() ?></td>
               <td><?php echo format_date($invoice->getIssueDate()) ?></td>
               <td><?php echo format_date($invoice->getDueDate()) ?></td>
               <td>

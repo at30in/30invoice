@@ -37,7 +37,7 @@ all:
     validation_error_id_prefix: error_for_
     
     standard_helpers:       [Partial, Cache, jQuery, I18N, Number, GoogleButtons3, Global]
-    enabled_modules:        [default, sfGuardAuth, sfGuardGroup, sfGuardUser, sfGuardPermission]
+    enabled_modules:        [default, sfGuardAuth, sfGuardGroup, sfGuardUser, sfGuardPermission, invoicesTombola]
     
     login_module:           sfGuardAuth   # To be called when a non-authenticated user
     login_action:           signin        # Tries to access a secure page
