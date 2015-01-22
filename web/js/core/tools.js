@@ -119,6 +119,7 @@ var Tools = {};
       // When the user press ENTER on a field she "confirms" it (although is not actually saved) instead of submitting the whole form.
       $(this).find(selector).bind('keydown', 'return', function(e){
         $(this).blur().moveNext();
+        $(document).trigger('GlobalUpdateEvent');
         return false;
       });
       
