@@ -106,19 +106,19 @@
             <td colspan="4" rowspan="4" class="noborder"></td>
             <td><?php echo __('Subtotal') ?></td>
             <td id="td_subtotal" class="right">
-              <?php echo format_currency($invoice->getNetAmount(), $currency) ?>
+              <?php echo format_currency($invoice->getRoundedAmount('net'), $currency) ?>
             </td>
           </tr>
           <tr>
             <td><?php echo __('Taxes') ?></td>
             <td id="td_total_taxes" class="right">
-              <?php echo format_currency($invoice->getTaxAmount(), $currency) ?>
+              <?php echo format_currency($invoice->getRoundedAmount('tax'), $currency) ?>
             </td>
           </tr>
           <tr>
             <td><?php echo __('Discount') ?></td>
             <td id="td_global_discount" class="right">
-              <?php echo format_currency($invoice->getDiscountAmount(), $currency) ?>
+              <?php echo format_currency($invoice->getRoundedAmount('discount'), $currency) ?>
             </td>
           </tr>
           <tr class="strong">
