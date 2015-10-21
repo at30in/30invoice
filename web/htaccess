@@ -2,10 +2,6 @@ Options +FollowSymLinks +ExecCGI
 
 AddDefaultCharset utf-8 
 
-<IfModule mod_php5.c>
-php_value max_execution_time 300
-</IfModule>
-
 <IfModule mod_authz_host.c>
   <FilesMatch "\.(lock|conf)$">
     Order deny,allow
@@ -18,17 +14,22 @@ php_value max_execution_time 300
   </FilesMatch>
 </IfModule>
 
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Rule to test if rewrite module is available during
+  # the install process
+  RewriteRule test_rewrite1\.txt test_rewrite2.txt
 
   # uncomment the following line, if you are having trouble
   # getting no_script_name to work
   #RewriteBase /
 
   # we skip all files with .something
-  #RewriteCond %{REQUEST_URI} \..+$
-  #RewriteCond %{REQUEST_URI} !\.html$
-  #RewriteRule .* - [L]
+  RewriteCond %{REQUEST_URI} \..+$
+  RewriteCond %{REQUEST_URI} !\.html$
+  RewriteRule .* - [L]
 
   # we check if the .html version is here (caching)
   RewriteRule ^$ index.html [QSA]

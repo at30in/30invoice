@@ -123,8 +123,23 @@ class CustomerTable extends Doctrine_Table
    * @return array
    * @author Enrique Martinez
    **/
-  public function simpleRetrieveForSelect($q, $limit)
+  public function simpleRetrieveForSelect($q, $limit, $isCode = 0)
   {
+    if($isCode)
+    {
+      $items = Doctrine::getTable('Customer')->createQuery()
+        ->where('code LIKE ?', $q.'%')
+        ->limit($limit)
+        ->execute();
+
+      $res = array();
+      foreach ($items as $item)
+      {
+        $res[$item->getId()] = $item->getName();
+      }
+      return $res;
+    }
+
     $items = Doctrine::getTable('Customer')->createQuery()
       ->where('name_slug LIKE ?', '%'.CustomerTable::slugify($q).'%')
       ->limit($limit)
