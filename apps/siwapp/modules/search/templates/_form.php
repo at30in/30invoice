@@ -32,6 +32,7 @@ echo javascript_tag("var customer_name_autocomplete = '".$customer_name."'");
       echo $form['series_id']->renderRow();
       echo $form['number']->renderRow();
       echo $form['customer_id']->renderRow();
+      echo $form['customer_code']->renderRow();
       ?>
       </ul>
       <?php if($profile->is_tags) :?>

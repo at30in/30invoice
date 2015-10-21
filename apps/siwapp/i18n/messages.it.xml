@@ -1066,6 +1066,10 @@
         <source>show all results</source>
         <target>Vedi tutti i risultati</target>
       </trans-unit>
+      <trans-unit>
+        <source>Customer code</source>
+        <target>Codice cliente</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

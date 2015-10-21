@@ -2,6 +2,10 @@ Options +FollowSymLinks +ExecCGI
 
 AddDefaultCharset utf-8 
 
+<IfModule mod_php5.c>
+php_value max_execution_time 300
+</IfModule>
+
 <IfModule mod_authz_host.c>
   <FilesMatch "\.(lock|conf)$">
     Order deny,allow
