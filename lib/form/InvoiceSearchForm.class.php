@@ -18,6 +18,7 @@ class InvoiceSearchForm extends BaseForm
       'number'        => new sfWidgetFormInputText(),
       'customer_id'   => new sfWidgetFormChoice(array('choices' => array())),
       'customer_code' => new sfWidgetFormChoice(array('choices' => array())),
+      'customer_identification' => new sfWidgetFormChoice(array('choices' => array())),
       'tags'          => new sfWidgetFormInputHidden(),
       'status'        => new sfWidgetFormInputHidden(),
       'sent'          => new sfWidgetFormChoice(array('choices' => array(''=>'', 1=>'yes', 0=>'no'))),
@@ -60,6 +61,13 @@ class InvoiceSearchForm extends BaseForm
     $this->widgetSchema['customer_code']->setOption('renderer_class', 'sfWidgetFormJQueryAutocompleter');
     $this->widgetSchema['customer_code']->setOption('renderer_options', array(
       'url'   => url_for('search/ajaxCustomerFromCodeAutocomplete'),
+      'value_callback' => 'CustomerTable::getCustomerName'
+    ));
+
+    // autocomplete for customer customer_identification
+    $this->widgetSchema['customer_identification']->setOption('renderer_class', 'sfWidgetFormJQueryAutocompleter');
+    $this->widgetSchema['customer_identification']->setOption('renderer_options', array(
+      'url'   => url_for('search/ajaxCustomerFromIdentificationAutocomplete'),
       'value_callback' => 'CustomerTable::getCustomerName'
     ));
     

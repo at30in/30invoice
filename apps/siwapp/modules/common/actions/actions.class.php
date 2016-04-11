@@ -138,7 +138,7 @@ class commonActions extends sfActions
     
     $q = $request->getParameter('q');
     $items = Doctrine::getTable('Customer')
-      ->retrieveForSelect($request->getParameter('q'), $request->getParameter('limit'), $request->getParameter('code',0));
+      ->retrieveForSelect($request->getParameter('q'), $request->getParameter('limit'), $request->getParameter('code',0), $request->getParameter('identification',0));
 
     return $this->renderText(json_encode($items));
   }

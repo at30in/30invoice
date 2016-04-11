@@ -23,6 +23,7 @@ use_helper('JavascriptBase');
 
 $urlAjax      = url_for('common/ajaxCustomerAutocomplete');
 $urlAjaxCode  = url_for('common/ajaxCustomerAutocomplete?code=1');
+$urlAjaxIdentification  = url_for('common/ajaxCustomerAutocomplete?identification=1');
 echo javascript_tag("
   $('#".$invoiceForm['customer_name']->renderId()."')
     .autocomplete('".$urlAjax."', jQuery.extend({}, {
@@ -78,6 +79,36 @@ echo javascript_tag("
     .result(function(event, item) {
       $('#".$invoiceForm['customer_name']->renderId()."').val(item[1]);
       $('#".$invoiceForm['customer_identification']->renderId()."').val(item[2]);
+      $('#".$invoiceForm['contact_person']->renderId()."').val(item[3]);
+      $('#".$invoiceForm['customer_email']->renderId()."').val(item[4]);
+      $('#".$invoiceForm['invoicing_address']->renderId()."').val(item[5]);
+      $('#".$invoiceForm['shipping_address']->renderId()."').val(item[6]);
+    });
+
+    $('#".$invoiceForm['customer_identification']->renderId()."')
+    .autocomplete('".$urlAjaxIdentification."', jQuery.extend({}, {
+      dataType: 'json',
+      parse:    function(data) {
+        var parsed = [];
+        for (key in data) {
+          parsed[parsed.length] = { data: [ 
+            data[key].customer_identification,
+            data[key].code,
+            data[key].customer, 
+            data[key].contact_person,
+            data[key].customer_email,
+            data[key].invoicing_address,
+            data[key].shipping_address
+          ], value: data[key].customer_identification, result: data[key].customer_identification };
+        }
+        return parsed;
+      },
+      minChars: 2,
+      matchContains: true
+    }))
+    .result(function(event, item) {
+      $('#".$invoiceForm['customer_code']->renderId()."').val(item[1]);
+      $('#".$invoiceForm['customer_name']->renderId()."').val(item[2]);
       $('#".$invoiceForm['contact_person']->renderId()."').val(item[3]);
       $('#".$invoiceForm['customer_email']->renderId()."').val(item[4]);
       $('#".$invoiceForm['invoicing_address']->renderId()."').val(item[5]);
