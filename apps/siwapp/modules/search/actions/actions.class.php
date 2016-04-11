@@ -55,4 +55,20 @@ class searchActions extends sfActions
 
     return $this->renderText(json_encode($items));
   }
+
+  /**
+   * ajax action for customer name autocompletion from identification
+   *
+   * @return JSON
+   * @author Enrique Martinez
+   **/
+  public function executeAjaxCustomerFromIdentificationAutocomplete(sfWebRequest $request)
+  {
+    $this->getResponse()->setContentType('application/json');
+    $q = $request->getParameter('q');
+    $items = Doctrine::getTable('Customer')->simpleRetrieveForSelect($request->getParameter('q'),
+      $request->getParameter('limit'), 0, 1);
+
+    return $this->renderText(json_encode($items));
+  }
 }

@@ -81,7 +81,7 @@ class CustomerTable extends Doctrine_Table
    * @return array
    * @author Enrique Martinez
    **/
-  public function retrieveForSelect($q, $limit, $isCode)
+  public function retrieveForSelect($q, $limit, $isCode, $isIdentification)
   {
     if($isCode)
     {
@@ -89,6 +89,13 @@ class CustomerTable extends Doctrine_Table
         ->where('code LIKE ?', $q.'%')
         ->limit($limit)
         ->execute();
+    }
+    else if($isIdentification) 
+    {
+      $items = $this->createQuery()
+        ->where('identification LIKE ?', $q.'%')
+        ->limit($limit)
+        ->execute(); 
     }
     else
     {
