@@ -32,9 +32,14 @@ class invoicesActions extends sfActions
     $sort       = $this->getUser()->getAttribute('sort', array('issue_date', 'desc'), $namespace);
     $page       = $this->getUser()->getAttribute('page', 1, $namespace);
     $maxResults = $this->getUser()->getPaginationMaxResults();
-    if($request->getParameter('showAllResults', false))
+
+    // Get a session value
+    $maxResults = $this->getUser()->getAttribute('showAllResults', $maxResults);
+    // Set a session value
+    if($request->getParameter('showAllResults'))
     {
-      $maxResults = 500;
+      $this->getUser()->setAttribute('showAllResults', $request->getParameter('showAllResults'));
+      $maxResults = $request->getParameter('showAllResults');
     }
     
     $q = InvoiceQuery::create()->search($search)->orderBy("$sort[0] $sort[1], number $sort[1]");

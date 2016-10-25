@@ -20,8 +20,24 @@
 <?php endif; ?>
 
   <div class="small">
-    <?php $url = url_for($route) . '?showAllResults=true'; ?>
-    <?php echo link_to(__('show all results'), $url) ?>
+    Risultati per pagina
+    <select id="nForPage">
+      <option value="0">-</option>
+      <option value="10">10</option>
+      <option value="50">50</option>
+      <option value="500">500</option>
+    </select>
+    <?php //$url = url_for($route) . '?showAllResults=true'; ?>
+    <?php $url = url_for($route); ?>
+    <input type="hidden" id="urlRoute" name="urlRoute" value="<?php echo $url ?>">
+    <script>
+      $('#nForPage').change(function() {
+        var nForPage = $('#nForPage').val();
+        if(nForPage > 0) {
+          window.location.replace($('#urlRoute').val()+'?showAllResults='+nForPage);
+        }
+      });
+    </script>
     <?php echo __('Showing [1]-[2] of [3] results', array(
       '[1]' => $pager->getFirstIndice(), 
       '[2]' => $pager->getLastIndice(), 
