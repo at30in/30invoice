@@ -38,6 +38,7 @@ class Common extends BaseCommon
       default:
         foreach ($this->getItems() as $item)
         {
+          $item->setGlobalDiscount($this->getDiscount());
           $method = 'get'.sfInflector::camelize($field);
           $val += $item->$method();
         }
@@ -50,6 +51,19 @@ class Common extends BaseCommon
     }
 
     return $val;
+  }
+
+  public function hasDiscountItems()
+  {
+    $hasDiscount = false;
+    foreach ($this->getItems() as $item)
+    {
+      if ($item->getDiscount() > 0)
+      {
+        return true;
+      }
+    }
+    return $hasDiscount;
   }
   
   public function preSave($event)

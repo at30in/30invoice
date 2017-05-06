@@ -64,6 +64,7 @@ Common:
     description: clob
     terms: clob
     notes: clob
+    discount:        { type: decimal(53), scale: 2, notnull: true, default: 0 }
     base_amount:     { type: decimal(53), scale: 15 }
     discount_amount: { type: decimal(53), scale: 15 }
     net_amount:      { type: decimal(53), scale: 15 }

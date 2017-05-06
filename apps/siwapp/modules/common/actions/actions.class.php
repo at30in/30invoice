@@ -29,6 +29,9 @@ class commonActions extends sfActions
     
     $items  = array();
     $totals = array();
+
+    // Setting global discount
+    $invoice->setDiscount($data['discount']);
     
     if (isset($data['Items']))
     {
@@ -53,7 +56,7 @@ class commonActions extends sfActions
 
         $invoice->Items[] = $item;
       }
-      
+
       $totals['base']     = $format->format($invoice->calculate('base_amount',true), 'c', $currency);
       $totals['discount'] = $format->format($invoice->calculate('discount_amount',true), 'c', $currency);
       $totals['net']      = $format->format($invoice->calculate('net_amount',true), 'c', $currency);

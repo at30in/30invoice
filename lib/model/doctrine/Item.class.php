@@ -5,6 +5,8 @@
  */
 class Item extends BaseItem
 {
+  private $global_discount = 0;
+
   public function getBaseAmount()
   {
     return $this->getUnitaryCost() * $this->getQuantity();
@@ -17,6 +19,12 @@ class Item extends BaseItem
   
   public function getDiscountAmount()
   {
+    if ($this->global_discount > 0)
+    {
+      $discount_amount  = $this->getBaseAmount() * $this->getDiscount() / 100;
+      $netAmount        = $this->getBaseAmount() - ($this->getBaseAmount() * $this->getDiscount() / 100);
+      return $discount_amount + ($netAmount * $this->global_discount / 100);
+    }
     return $this->getBaseAmount() * $this->getDiscount() / 100;
   }
   
@@ -87,5 +95,10 @@ class Item extends BaseItem
   public function getUnitaryCost()
   {
     return (float) $this->_get('unitary_cost');
+  }
+
+  public function setGlobalDiscount($global_discount)
+  {
+    $this->global_discount = $global_discount;
   }
 }
