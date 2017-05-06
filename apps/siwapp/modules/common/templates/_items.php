@@ -29,7 +29,7 @@
 
   <tfoot id="global_calculations">
     <tr>
-      <td colspan="<?php echo ($sf_user->has_module('products'))?'5':'4'?>" rowspan="5" class="noborder top">
+      <td colspan="<?php echo ($sf_user->has_module('products'))?'5':'4'?>" rowspan="6" class="noborder top">
         <div id="addItem">
           <?php 
             $addItemOptions = array(
@@ -59,6 +59,12 @@
       <td><?php echo __('Base') ?></td>
       <td class="base right">
         <?php echo format_currency($invoice->getRoundedAmount('base'), $currency) ?>
+      </td>
+    </tr>
+    <tr>
+      <td><?php echo __('Discount for the total') ?></td>
+      <td class="total-discount right">
+        <?php echo $invoiceForm['discount']->render(array(), ESC_RAW) ?> %
       </td>
     </tr>
     <tr>

@@ -137,7 +137,7 @@
       </trans-unit>
       <trans-unit>
         <source>Base</source>
-        <target>Base</target>
+        <target>Imponibile</target>
       </trans-unit>
       <trans-unit>
         <source>Discount</source>
@@ -1069,6 +1069,10 @@
       <trans-unit>
         <source>Customer code</source>
         <target>Codice cliente</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Discount for the total</source>
+        <target>Sconto su totale</target>
       </trans-unit>
     </body>
   </file>

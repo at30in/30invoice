@@ -33,6 +33,8 @@ class InvoiceForm extends CommonForm
     $this->widgetSchema['closed']->setLabel('Force to be closed');
 
     $this->widgetSchema['sent_by_email']->setLabel('Sent by email');
+
+    $this->widgetSchema['discount']   = new sfWidgetFormInputText(array(), array('size'=>'3', 'class'=>'observable discount'));
     
     $this->default_series = Doctrine::getTable('Series')->find(sfContext::getInstance()->getUser()->getProfile()->getSeries())->value;
     $this->setDefaults(array(
